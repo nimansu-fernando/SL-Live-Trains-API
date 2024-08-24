@@ -20,10 +20,15 @@ const deleteStation = (id) => {
     return db.query('DELETE FROM stations WHERE id = ?', [id]);
 };
 
+const getStationByCode = (station_code) => {
+    return db.query('SELECT * FROM stations WHERE station_code = ?', [station_code]);
+};
+
 module.exports = {
     getAllStations,
     getStationById,
     createStation,
     updateStation,
-    deleteStation
+    deleteStation,
+    getStationByCode
 };

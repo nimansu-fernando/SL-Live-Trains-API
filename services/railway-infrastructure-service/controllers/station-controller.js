@@ -47,3 +47,14 @@ exports.deleteStation = async (req, res) => {
         res.status(500).json({ message: 'Error deleting station', error });
     }
 };
+exports.getStationByCode = async (req, res) => {
+    try {
+        const [rows] = await stationService.getStationByCode(req.params.station_code);
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'Station not found' });
+        }
+        res.json(rows[0]);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving station', error });
+    }
+};

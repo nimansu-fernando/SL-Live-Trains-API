@@ -7,5 +7,6 @@ router.get('/:id', stationController.getStationById);
 router.post('/', stationController.createStation);
 router.put('/:id', stationController.updateStation);
 router.delete('/:id', stationController.deleteStation);
+router.get('/name/:station_code', stationController.getStationByCode);
 
 module.exports = router;

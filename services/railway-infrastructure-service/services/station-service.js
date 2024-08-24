@@ -20,10 +20,15 @@ const deleteStation = (id) => {
     return stationModel.deleteStation(id);
 };
 
+const getStationByCode = (station_code) => {
+    return stationModel.getStationByCode(station_code);
+};
+
 module.exports = {
     getAllStations,
     getStationById,
     createStation,
     updateStation,
-    deleteStation
+    deleteStation,
+    getStationByCode
 };
