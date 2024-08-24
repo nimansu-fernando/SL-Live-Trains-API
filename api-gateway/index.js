@@ -22,11 +22,11 @@ app.use(cors({
 app.use(rateLimiter);
 app.use(logRequests);
 
-app.use('/railway-infrastructure', railwayInfrastructureRoutes);
-app.use('/locomotive-management', locomotiveManagementRoutes);
-app.use('/trip-management', tripManagementRoutes);
-app.use('/location', locationRoutes);
-app.use('/data-ingestion', dataIngestionRoutes);
+app.use('/api/railway-infrastructure', railwayInfrastructureRoutes);
+app.use('/api/locomotive-management', locomotiveManagementRoutes);
+app.use('/api/trip-management', tripManagementRoutes);
+app.use('/api/location', locationRoutes);
+app.use('/api/data-ingestion', dataIngestionRoutes);
 
 app.use(errorHandler);
 
