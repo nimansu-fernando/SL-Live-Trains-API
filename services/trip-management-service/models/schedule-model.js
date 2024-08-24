@@ -20,10 +20,18 @@ const deleteSchedule = (id) => {
     return db.query('DELETE FROM schedules WHERE id = ?', [id]);
 };
 
+const getScheduleDetailsByTripId = (trip_id) => {
+    return db.query(
+        'SELECT start_time, end_time, frequency, duration FROM schedules WHERE trip_id = ?',
+        [trip_id]
+    );
+};
+
 module.exports = {
     getAllSchedules,
     getScheduleById,
     createSchedule,
     updateSchedule,
-    deleteSchedule
+    deleteSchedule,
+    getScheduleDetailsByTripId
 };

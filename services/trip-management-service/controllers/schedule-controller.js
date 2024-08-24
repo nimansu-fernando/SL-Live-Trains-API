@@ -47,3 +47,16 @@ exports.deleteSchedule = async (req, res) => {
         res.status(500).json({ message: 'Error deleting schedule', error });
     }
 };
+
+exports.getScheduleDetailsByTripId = async (req, res) => {
+    try {
+        const { trip_id } = req.params;
+        const [rows] = await scheduleService.getScheduleDetailsByTripId(trip_id);
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'Schedule not found' });
+        }
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving schedule details', error });
+    }
+};

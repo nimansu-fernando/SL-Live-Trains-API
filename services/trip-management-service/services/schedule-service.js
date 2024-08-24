@@ -20,10 +20,15 @@ const deleteSchedule = (id) => {
     return scheduleModel.deleteSchedule(id);
 };
 
+const getScheduleDetailsByTripId = (trip_id) => {
+    return scheduleModel.getScheduleDetailsByTripId(trip_id);
+};
+
 module.exports = {
     getAllSchedules,
     getScheduleById,
     createSchedule,
     updateSchedule,
-    deleteSchedule
+    deleteSchedule,
+    getScheduleDetailsByTripId
 };
