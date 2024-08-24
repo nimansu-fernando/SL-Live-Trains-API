@@ -47,3 +47,15 @@ exports.deleteTrain = async (req, res) => {
         res.status(500).json({ message: 'Error deleting train', error });
     }
 };
+
+exports.getTrainNumberByEngineNumber = async (req, res) => {
+    try {
+        const [rows] = await trainService.getTrainNumberByEngineNumber(req.params.engine_number);
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'Train not found' });
+        }
+        res.json(rows[0]);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving train number', error });
+    }
+};

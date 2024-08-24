@@ -20,10 +20,15 @@ const deleteTrain = (id) => {
     return db.query('DELETE FROM trains WHERE id = ?', [id]);
 };
 
+const getTrainNumberByEngineNumber = (engineNumber) => {
+    return db.query('SELECT train_number FROM trains WHERE engine_number = ?', [engineNumber]);
+};
+
 module.exports = {
     getAllTrains,
     getTrainById,
     createTrain,
     updateTrain,
-    deleteTrain
+    deleteTrain,
+    getTrainNumberByEngineNumber
 };

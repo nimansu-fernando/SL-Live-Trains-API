@@ -20,10 +20,15 @@ const deleteTrain = (id) => {
     return trainModel.deleteTrain(id);
 };
 
+const getTrainNumberByEngineNumber = (engineNumber) => {
+    return trainModel.getTrainNumberByEngineNumber(engineNumber);
+};
+
 module.exports = {
     getAllTrains,
     getTrainById,
     createTrain,
     updateTrain,
-    deleteTrain
+    deleteTrain,
+    getTrainNumberByEngineNumber
 };

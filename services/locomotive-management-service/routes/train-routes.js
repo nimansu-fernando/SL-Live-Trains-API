@@ -7,5 +7,6 @@ router.get('/:id', trainController.getTrainById);
 router.post('/', trainController.createTrain);
 router.put('/:id', trainController.updateTrain);
 router.delete('/:id', trainController.deleteTrain);
+router.get('/by-engine/:engine_number', trainController.getTrainNumberByEngineNumber);
 
 module.exports = router;
