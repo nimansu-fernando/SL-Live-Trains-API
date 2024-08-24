@@ -7,5 +7,6 @@ router.get('/:id', routeController.getRouteById);
 router.post('/', routeController.createRoute);
 router.put('/:id', routeController.updateRoute);
 router.delete('/:id', routeController.deleteRoute);
+router.get('/name/:id', routeController.getRouteNameByRouteId);
 
 module.exports = router;

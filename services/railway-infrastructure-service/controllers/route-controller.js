@@ -47,3 +47,15 @@ exports.deleteRoute = async (req, res) => {
         res.status(500).json({ message: 'Error deleting route', error });
     }
 };
+
+exports.getRouteNameByRouteId = async (req, res) => {
+    try {
+        const [rows] = await routeService.getRouteNameByRouteId(req.params.id);
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'Route not found' });
+        }
+        res.json({ name: rows[0].name });
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving route name', error });
+    }
+};

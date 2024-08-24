@@ -20,10 +20,15 @@ const deleteRoute = (id) => {
     return db.query('DELETE FROM routes WHERE id = ?', [id]);
 };
 
+const getRouteNameByRouteId = (routeId) => {
+    return db.query('SELECT name FROM routes WHERE route_key = ?', [routeId]);
+};
+
 module.exports = {
     getAllRoutes,
     getRouteById,
     createRoute,
     updateRoute,
-    deleteRoute
+    deleteRoute,
+    getRouteNameByRouteId
 };

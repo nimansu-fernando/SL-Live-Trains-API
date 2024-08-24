@@ -20,10 +20,15 @@ const deleteRoute = (id) => {
     return routeModel.deleteRoute(id);
 };
 
+const getRouteNameByRouteId = (routeId) => {
+    return routeModel.getRouteNameByRouteId(routeId);
+};
+
 module.exports = {
     getAllRoutes,
     getRouteById,
     createRoute,
     updateRoute,
-    deleteRoute
+    deleteRoute,
+    getRouteNameByRouteId
 };
