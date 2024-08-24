@@ -47,3 +47,15 @@ exports.deleteEngine = async (req, res) => {
         res.status(500).json({ message: 'Error deleting engine', error });
     }
 };
+
+exports.getEngineNumberByDeviceId = async (req, res) => {
+    try {
+        const [rows] = await engineService.getEngineNumberByDeviceId(req.params.device_id);
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'Engine not found' });
+        }
+        res.json(rows[0]);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving engine number', error });
+    }
+};

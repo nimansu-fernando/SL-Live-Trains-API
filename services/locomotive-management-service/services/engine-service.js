@@ -20,10 +20,15 @@ const deleteEngine = (id) => {
     return engineModel.deleteEngine(id);
 };
 
+const getEngineNumberByDeviceId = (iotDeviceId) => {
+    return engineModel.getEngineNumberByDeviceId(iotDeviceId);
+};
+
 module.exports = {
     getAllEngines,
     getEngineById,
     createEngine,
     updateEngine,
-    deleteEngine
+    deleteEngine,
+    getEngineNumberByDeviceId
 };

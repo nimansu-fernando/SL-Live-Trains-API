@@ -20,10 +20,15 @@ const deleteEngine = (id) => {
     return db.query('DELETE FROM engines WHERE id = ?', [id]);
 };
 
+const getEngineNumberByDeviceId = (iotDeviceId) => {
+    return db.query('SELECT engine_number FROM engines WHERE iot_device_id = ?', [iotDeviceId]);
+};
+
 module.exports = {
     getAllEngines,
     getEngineById,
     createEngine,
     updateEngine,
-    deleteEngine
+    deleteEngine,
+    getEngineNumberByDeviceId
 };
