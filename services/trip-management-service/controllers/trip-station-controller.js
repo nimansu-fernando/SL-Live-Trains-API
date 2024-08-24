@@ -10,13 +10,12 @@ exports.getAllTripStations = async (req, res) => {
 };
 
 exports.getTripStationById = async (req, res) => {
-    const { trip_id, station_id, stop_sequence } = req.params;
     try {
-        const tripStation = await tripStationService.getTripStation(trip_id, station_id, stop_sequence);
-        if (!tripStation) {
+        const [rows] = await tripStationService.getTripStationById(req.params.id);
+        if (rows.length === 0) {
             return res.status(404).json({ message: 'Trip station not found' });
         }
-        res.json(tripStation);
+        res.json(rows[0]);
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving trip station', error });
     }
@@ -24,35 +23,40 @@ exports.getTripStationById = async (req, res) => {
 
 exports.createTripStation = async (req, res) => {
     try {
-        const tripStation = await tripStationService.createTripStation(req.body);
-        res.status(201).json(tripStation);
+        const result = await tripStationService.createTripStation(req.body);
+        res.status(201).json({ id: result.insertId, ...req.body });
     } catch (error) {
         res.status(500).json({ message: 'Error creating trip station', error });
     }
 };
 
 exports.updateTripStation = async (req, res) => {
-    const { trip_id, station_id, stop_sequence } = req.params;
     try {
-        const updatedTripStation = await tripStationService.updateTripStation(trip_id, station_id, stop_sequence, req.body);
-        if (!updatedTripStation) {
-            return res.status(404).json({ message: 'Trip station not found' });
-        }
-        res.json(updatedTripStation);
+        await tripStationService.updateTripStation(req.params.id, req.body);
+        res.json({ message: 'Trip station updated successfully' });
     } catch (error) {
         res.status(500).json({ message: 'Error updating trip station', error });
     }
 };
 
 exports.deleteTripStation = async (req, res) => {
-    const { trip_id, station_id, stop_sequence } = req.params;
     try {
-        const result = await tripStationService.deleteTripStation(trip_id, station_id, stop_sequence);
-        if (!result) {
-            return res.status(404).json({ message: 'Trip station not found' });
-        }
+        await tripStationService.deleteTripStation(req.params.id);
         res.json({ message: 'Trip station deleted successfully' });
     } catch (error) {
         res.status(500).json({ message: 'Error deleting trip station', error });
+    }
+};
+
+exports.getStationsByTripId = async (req, res) => {
+    try {
+        const { trip_id } = req.params;
+        const [rows] = await tripStationService.getStationsByTripId(trip_id);
+        if (!rows || rows.length === 0) {
+            return res.status(404).json({ message: 'Stations not found' });
+        }
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving stations', error });
     }
 };

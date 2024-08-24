@@ -16,6 +16,7 @@ const scheduleSchema = Joi.object({
 });
 
 const tripStationSchema = Joi.object({
+    id: Joi.number().integer().optional(),  
     trip_id: Joi.number().integer().required(),  
     station_id: Joi.string().max(255).required(),  
     stop_sequence: Joi.number().integer().required(),  

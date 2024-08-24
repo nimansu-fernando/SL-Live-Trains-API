@@ -3,9 +3,11 @@ const router = express.Router();
 const tripStationController = require('../controllers/trip-station-controller');
 
 router.get('/', tripStationController.getAllTripStations);
-router.get('/:trip_id/:station_id/:stop_sequence', tripStationController.getTripStationById);
+router.get('/:id', tripStationController.getTripStationById);
 router.post('/', tripStationController.createTripStation);
-router.put('/:trip_id/:station_id/:stop_sequence', tripStationController.updateTripStation);
-router.delete('/:trip_id/:station_id/:stop_sequence', tripStationController.deleteTripStation);
+router.put('/:id', tripStationController.updateTripStation);
+router.delete('/:id', tripStationController.deleteTripStation);
+router.get('/stations/:trip_id', tripStationController.getStationsByTripId);
+
 
 module.exports = router;

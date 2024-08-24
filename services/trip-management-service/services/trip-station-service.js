@@ -4,26 +4,31 @@ const getAllTripStations = () => {
     return tripStationModel.getAllTripStations();
 };
 
-const getTripStation = (trip_id, station_id, stop_sequence) => {
-    return tripStationModel.getTripStationByCompositeKey(trip_id, station_id, stop_sequence);
+const getTripStationById = (id) => {
+    return tripStationModel.getTripStationById(id);
 };
 
 const createTripStation = (tripStation) => {
     return tripStationModel.createTripStation(tripStation);
 };
 
-const updateTripStation = (trip_id, station_id, stop_sequence, tripStation) => {
-    return tripStationModel.updateTripStationByCompositeKey(trip_id, station_id, stop_sequence, tripStation);
+const updateTripStation = (id, tripStation) => {
+    return tripStationModel.updateTripStation(id, tripStation);
 };
 
-const deleteTripStation = (trip_id, station_id, stop_sequence) => {
-    return tripStationModel.deleteTripStationByCompositeKey(trip_id, station_id, stop_sequence);
+const deleteTripStation = (id) => {
+    return tripStationModel.deleteTripStation(id);
+};
+
+const getStationsByTripId = (trip_id) => {
+    return tripStationModel.getStationsByTripId(trip_id);
 };
 
 module.exports = {
     getAllTripStations,
-    getTripStation,
+    getTripStationById,
     createTripStation,
     updateTripStation,
-    deleteTripStation
+    deleteTripStation,
+    getStationsByTripId
 };
