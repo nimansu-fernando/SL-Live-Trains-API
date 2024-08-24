@@ -8,7 +8,7 @@ const app = express();
 connectDB();
 app.use(express.json());
 
-app.use('/api/ingestion', ingestionRoutes);
+app.use('/ingestion', ingestionRoutes);
 
 
 app.use((err, req, res, next) => {

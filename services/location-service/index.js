@@ -8,7 +8,7 @@ const locationRoutes = require('./routes/location-routes');
 connectDB();
 
 app.use(express.json());
-app.use('/api', locationRoutes);
+app.use('/train-locations', locationRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
