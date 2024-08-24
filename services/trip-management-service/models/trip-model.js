@@ -20,10 +20,18 @@ const deleteTrip = (id) => {
     return db.query('DELETE FROM trips WHERE id = ?', [id]);
 };
 
+const getTripDetailsByTrainId = (train_id) => {
+    return db.query(
+        'SELECT trip_number, route_id, type FROM trips WHERE train_id = ?',
+        [train_id]
+    );
+};
+
 module.exports = {
     getAllTrips,
     getTripById,
     createTrip,
     updateTrip,
-    deleteTrip
+    deleteTrip,
+    getTripDetailsByTrainId
 };

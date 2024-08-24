@@ -20,10 +20,15 @@ const deleteTrip = (id) => {
     return tripModel.deleteTrip(id);
 };
 
+const getTripDetailsByTrainId = (train_id) => {
+    return tripModel.getTripDetailsByTrainId(train_id);
+};
+
 module.exports = {
     getAllTrips,
     getTripById,
     createTrip,
     updateTrip,
-    deleteTrip
+    deleteTrip,
+    getTripDetailsByTrainId
 };

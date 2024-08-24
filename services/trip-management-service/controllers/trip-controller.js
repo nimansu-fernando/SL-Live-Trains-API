@@ -47,3 +47,16 @@ exports.deleteTrip = async (req, res) => {
         res.status(500).json({ message: 'Error deleting trip', error });
     }
 };
+
+exports.getTripDetailsByTrainId = async (req, res) => {
+    try {
+        const { train_id } = req.params;
+        const [rows] = await tripService.getTripDetailsByTrainId(train_id);
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'Trip not found' });
+        }
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json({ message: 'Error retrieving trip details', error });
+    }
+};
