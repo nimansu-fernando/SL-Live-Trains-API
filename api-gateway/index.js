@@ -28,6 +28,7 @@ const applySecurity = (req, res, next) => {
     const unprotectedRoutes = [
         '/api/data-ingestion/ingestion/ingest',
         '/api/location/train-locations/data',
+        '/api/location/train-locations/filter-trains',
         '/api/user/auth/register',
         '/api/user/auth/login'
     ];
