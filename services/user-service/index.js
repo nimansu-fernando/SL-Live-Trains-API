@@ -15,7 +15,7 @@ db.getConnection()
     console.error('Database connection failed:', err.message);
   });
 
-const PORT = process.env.PORT || 3007;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`User service running on port ${PORT}`);
 });
