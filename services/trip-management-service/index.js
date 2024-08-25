@@ -10,7 +10,7 @@ app.use('/trips', tripRoutes);
 app.use('/schedules', scheduleRoutes);
 app.use('/trip-stations', tripStationRoutes);
 
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
     console.log(`Trip Management Service running on port ${PORT}`);
