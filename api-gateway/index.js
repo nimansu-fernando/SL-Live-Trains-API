@@ -25,15 +25,33 @@ app.use(logRequests);
 
 const applySecurity = (req, res, next) => {
     console.log(`Request path: ${req.path}`);
+    
+    // these needs public token
+    const publicTokenRoutes = [
+        '/api/location/train-locations/data',
+        '/api/location/train-locations/filter-trains',
+        '/api/railway-infrastructure/stations/names/order'
+    ];
+
+    // unprotected
     const unprotectedRoutes = [
         '/api/data-ingestion/ingestion/ingest',
         '/api/location/train-locations/',
-        '/api/location/train-locations/data',
-        '/api/location/train-locations/filter-trains',
-        '/api/railway-infrastructure/stations/names/order',
         '/api/user/auth/register',
         '/api/user/auth/login'
     ];
+
+    if (publicTokenRoutes.includes(req.path)) {
+        const token = req.headers['x-public-token'];
+
+        if (token === process.env.PUBLIC_API_TOKEN) {
+            console.log(`Valid public token provided for ${req.path}`);
+            return next(); 
+        } else {
+            console.log(`Invalid or missing public token for ${req.path}`);
+            return res.status(403).json({ message: 'Forbidden: Invalid or missing public token' });
+        }
+    }
 
     if (unprotectedRoutes.includes(req.path)) {
         console.log(`Unprotected route: ${req.path}`);
