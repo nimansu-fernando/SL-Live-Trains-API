@@ -24,11 +24,16 @@ const getStationByCode = (station_code) => {
     return stationModel.getStationByCode(station_code);
 };
 
+const getAllStationNamesOrdered = () => {
+    return stationModel.getAllStationNamesOrdered();
+};
+
 module.exports = {
     getAllStations,
     getStationById,
     createStation,
     updateStation,
     deleteStation,
-    getStationByCode
+    getStationByCode,
+    getAllStationNamesOrdered
 };

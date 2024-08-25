@@ -29,6 +29,7 @@ const applySecurity = (req, res, next) => {
         '/api/data-ingestion/ingestion/ingest',
         '/api/location/train-locations/data',
         '/api/location/train-locations/filter-trains',
+        '/api/railway-infrastructure/stations/names/order',
         '/api/user/auth/register',
         '/api/user/auth/login'
     ];

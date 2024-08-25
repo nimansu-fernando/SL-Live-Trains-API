@@ -24,11 +24,16 @@ const getStationByCode = (station_code) => {
     return db.query('SELECT * FROM stations WHERE station_code = ?', [station_code]);
 };
 
+const getAllStationNamesOrdered = () => {
+    return db.query('SELECT name FROM stations ORDER BY name ASC');
+};
+
 module.exports = {
     getAllStations,
     getStationById,
     createStation,
     updateStation,
     deleteStation,
-    getStationByCode
+    getStationByCode,
+    getAllStationNamesOrdered
 };
