@@ -16,7 +16,7 @@ const userRoutes = require('./routes/user-routes');
 
 // CORS Configuration
 app.use(cors({
-    origin: 'http://localhost:3006',
+    origin: 'http://localhost:3007',
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
@@ -27,6 +27,7 @@ const applySecurity = (req, res, next) => {
     console.log(`Request path: ${req.path}`);
     const unprotectedRoutes = [
         '/api/data-ingestion/ingestion/ingest',
+        '/api/location/train-locations/',
         '/api/location/train-locations/data',
         '/api/location/train-locations/filter-trains',
         '/api/railway-infrastructure/stations/names/order',
@@ -35,9 +36,11 @@ const applySecurity = (req, res, next) => {
     ];
 
     if (unprotectedRoutes.includes(req.path)) {
+        console.log(`Unprotected route: ${req.path}`);
         return next(); 
     }
 
+    console.log(`Protected route: ${req.path}`);
     return authenticate(req, res, next);
 };
 
