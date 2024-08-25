@@ -6,6 +6,7 @@ const logRequests = require('./middlewares/logging-middleware');
 const errorHandler = require('./middlewares/error-handler');
 const rateLimiter = require('./config/rate-limiter-config');
 const authenticate = require('./middlewares/authentication-middleware');
+const tokenManager = require('./middlewares/tokenManager');
 
 const railwayInfrastructureRoutes = require('./routes/railway-infrastructure-routes');
 const locomotiveManagementRoutes = require('./routes/locomotive-management-routes');
@@ -13,19 +14,20 @@ const tripManagementRoutes = require('./routes/trip-management-routes');
 const locationRoutes = require('./routes/location-routes');
 const dataIngestionRoutes = require('./routes/data-ingestion-routes');
 const userRoutes = require('./routes/user-routes');
+const publicTokenRoutes = require('./routes/token-routes'); // Add this line
 
 // CORS Configuration
 app.use(cors({
     origin: 'http://localhost:3007',
     methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-public-token'],
 }));
 
 app.use(logRequests);
 
 const applySecurity = (req, res, next) => {
     console.log(`Request path: ${req.path}`);
-    
+
     // these needs public token
     const publicTokenRoutes = [
         '/api/location/train-locations/data',
@@ -35,6 +37,7 @@ const applySecurity = (req, res, next) => {
 
     // unprotected
     const unprotectedRoutes = [
+        '/api/public-token',
         '/api/data-ingestion/ingestion/ingest',
         '/api/location/train-locations/',
         '/api/user/auth/register',
@@ -44,7 +47,7 @@ const applySecurity = (req, res, next) => {
     if (publicTokenRoutes.includes(req.path)) {
         const token = req.headers['x-public-token'];
 
-        if (token === process.env.PUBLIC_API_TOKEN) {
+        if (token === tokenManager.getCurrentToken()) {
             console.log(`Valid public token provided for ${req.path}`);
             return next(); 
         } else {
@@ -64,14 +67,13 @@ const applySecurity = (req, res, next) => {
 
 app.use(applySecurity);
 
-app.use('/location/api/locations', rateLimiter);
-
 app.use('/api/railway-infrastructure', railwayInfrastructureRoutes);
 app.use('/api/locomotive-management', locomotiveManagementRoutes);
 app.use('/api/trip-management', tripManagementRoutes);
 app.use('/api/location', locationRoutes);
 app.use('/api/data-ingestion', dataIngestionRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/public-token', publicTokenRoutes); // Add this line
 
 app.use(errorHandler);
 
