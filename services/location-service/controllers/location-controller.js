@@ -112,7 +112,33 @@ const postLocationData = async (req, res) => {
     }
 };
 
+const filterTrainDataByStations = async (req, res) => {
+    try {
+        const { startStation, endStation } = req.query;
+
+        if (!startStation || !endStation) {
+            return res.status(400).json({ message: 'Start station and end station are required' });
+        }
+
+        const locations = await LocationModel.find({});
+
+        const filteredLocations = locations.filter(location => {
+            const stoppingStations = location.stopping_stations || [];
+            const startIndex = stoppingStations.findIndex(station => station.station_name === startStation);
+            const endIndex = stoppingStations.findIndex(station => station.station_name === endStation);
+
+            return startIndex !== -1 && endIndex !== -1 && endIndex > startIndex;
+        });
+
+        res.status(200).json(filteredLocations);
+    } catch (error) {
+        console.error('Error filtering train data:', error.message);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+};
+
 module.exports = {
     getAllLocations,
-    postLocationData
+    postLocationData,
+    filterTrainDataByStations
 };

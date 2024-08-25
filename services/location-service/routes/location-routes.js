@@ -4,5 +4,6 @@ const locationController = require('../controllers/location-controller');
 
 router.post('/', locationController.postLocationData);
 router.get('/data', locationController.getAllLocations);
+router.get('/filter-trains', locationController.filterTrainDataByStations);
 
 module.exports = router;
