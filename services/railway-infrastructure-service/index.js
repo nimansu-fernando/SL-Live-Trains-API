@@ -10,7 +10,7 @@ app.use('/lines', lineRoutes);
 app.use('/routes', routeRoutes);
 app.use('/stations', stationRoutes);
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
     console.log(`Railway Infrastructure Service running on port ${PORT}`);
