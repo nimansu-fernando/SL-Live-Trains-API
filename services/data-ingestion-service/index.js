@@ -17,7 +17,7 @@ app.use((err, req, res, next) => {
 });
 
 
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Data Ingestion Service running on port ${PORT}`);
 });

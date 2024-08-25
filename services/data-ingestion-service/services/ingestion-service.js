@@ -1,7 +1,8 @@
 const IngestionModel = require('../models/ingestion-model');
 const axios = require('axios');
+require('dotenv').config();
 
-const LOCATION_SERVICE_URL = 'http://localhost:3000/api/location/train-locations/';
+const LOCATION_SERVICE_URL = process.env.LOCATION_SERVICE_URL;
 
 async function reverseGeocode(latitude, longitude) {
     const nominatimUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&accept-language=en`;
