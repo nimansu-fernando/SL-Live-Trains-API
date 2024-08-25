@@ -26,8 +26,8 @@ app.use(logRequests);
 const applySecurity = (req, res, next) => {
     console.log(`Request path: ${req.path}`);
     const unprotectedRoutes = [
-        '/data-ingestion/api/ingestion/ingest',
-        '/api/location/train-locations/',
+        '/api/data-ingestion/ingestion/ingest',
+        '/api/location/train-locations/data',
         '/api/user/auth/register',
         '/api/user/auth/login'
     ];
