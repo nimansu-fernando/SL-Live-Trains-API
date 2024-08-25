@@ -8,7 +8,7 @@ app.use(express.json());
 app.use('/engines', engineRoutes);
 app.use('/trains', trainRoutes);
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
     console.log(`Locomotive Management Service running on port ${PORT}`);
