@@ -8,13 +8,28 @@ const TRIP_MANAGEMENT_SERVICE_URL = process.env.TRIP_MANAGEMENT_SERVICE_URL;
 const RAILWAY_INFRASTRUCTURE_SERVICE_URL = process.env.RAILWAY_INFRASTRUCTURE_SERVICE_URL; 
 
 const getAllLocations = async (req, res) => {
+    const page = parseInt(req.query.page) || 1;  // default page 1 if not provided
+    const limit = parseInt(req.query.limit) || 10;  // default to 5 results for page
+
     try {
-        const locations = await LocationModel.find({});
+        const totalLocations = await LocationModel.countDocuments();  
+        const totalPages = Math.ceil(totalLocations / limit);  
+
+        const locations = await LocationModel.find({})
+            .skip((page - 1) * limit)  
+            .limit(limit);  
+
         if (locations.length === 0) {
             return res.status(404).json({ message: 'No location data found' });
         }
 
-        res.status(200).json(locations);
+        res.status(200).json({
+            page,         
+            limit,        
+            totalPages,   
+            totalLocations,  
+            data: locations  
+        });
     } catch (error) {
         console.error('Error fetching locations:', error.message);
         res.status(500).json({ message: 'Internal Server Error' });
