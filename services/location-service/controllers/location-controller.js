@@ -9,7 +9,7 @@ const RAILWAY_INFRASTRUCTURE_SERVICE_URL = process.env.RAILWAY_INFRASTRUCTURE_SE
 
 const getAllLocations = async (req, res) => {
     const page = parseInt(req.query.page) || 1;  // default page 1 if not provided
-    const limit = parseInt(req.query.limit) || 10;  // default to 5 results for page
+    const limit = parseInt(req.query.limit) || 10;  // default to 10 results for page
 
     try {
         const totalLocations = await LocationModel.countDocuments();  
