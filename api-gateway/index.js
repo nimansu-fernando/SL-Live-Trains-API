@@ -14,7 +14,7 @@ const tripManagementRoutes = require('./routes/trip-management-routes');
 const locationRoutes = require('./routes/location-routes');
 const dataIngestionRoutes = require('./routes/data-ingestion-routes');
 const userRoutes = require('./routes/user-routes');
-const publicTokenRoutes = require('./routes/token-routes'); // Add this line
+const publicTokenRoutes = require('./routes/token-routes'); 
 
 // CORS Configuration
 app.use(cors({
@@ -30,8 +30,8 @@ const applySecurity = (req, res, next) => {
 
     // these needs public token
     const publicTokenRoutes = [
-        '/api/location/train-locations/data',
-        '/api/location/train-locations/filter-trains',
+        '/api/v1/location/train-locations/data',
+        '/api/v1/location/train-locations/filter-trains',
         '/api/railway-infrastructure/stations/names/order'
     ];
 
@@ -39,7 +39,7 @@ const applySecurity = (req, res, next) => {
     const unprotectedRoutes = [
         '/api/public-token',
         '/api/data-ingestion/ingestion/ingest',
-        '/api/location/train-locations/',
+        '/api/v1/location/train-locations/',
         '/api/user/auth/register',
         '/api/user/auth/login'
     ];
@@ -67,13 +67,15 @@ const applySecurity = (req, res, next) => {
 
 app.use(applySecurity);
 
+app.use('/api/v1/location/train-locations/data', rateLimiter);
+
 app.use('/api/railway-infrastructure', railwayInfrastructureRoutes);
 app.use('/api/locomotive-management', locomotiveManagementRoutes);
 app.use('/api/trip-management', tripManagementRoutes);
-app.use('/api/location', locationRoutes);
+app.use('/api/v1/location', locationRoutes);
 app.use('/api/data-ingestion', dataIngestionRoutes);
 app.use('/api/user', userRoutes);
-app.use('/api/public-token', publicTokenRoutes); // Add this line
+app.use('/api/public-token', publicTokenRoutes);
 
 app.use(errorHandler);
 
