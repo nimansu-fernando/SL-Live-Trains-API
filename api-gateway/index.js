@@ -38,10 +38,10 @@ const applySecurity = (req, res, next) => {
     // unprotected
     const unprotectedRoutes = [
         '/api/public-token',
-        '/api/data-ingestion/ingestion/ingest',
         '/api/v1/location/train-locations/',
         '/api/user/auth/register',
-        '/api/user/auth/login'
+        '/api/user/auth/login',
+        '/'
     ];
 
     if (publicTokenRoutes.includes(req.path)) {
