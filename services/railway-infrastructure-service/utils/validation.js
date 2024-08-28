@@ -25,8 +25,14 @@ const stationSchema = Joi.object({
     line_id: Joi.string().max(10).required()
 });
 
+const lineRoutesSchema = Joi.object({
+    line_code: Joi.string().max(10).required(),
+    route_key: Joi.string().max(10).required(),
+});
+
 module.exports = {
     lineSchema,
     routeSchema,
-    stationSchema
+    stationSchema,
+    lineRoutesSchema
 };
