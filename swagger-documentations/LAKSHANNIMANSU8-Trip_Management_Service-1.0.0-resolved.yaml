@@ -1,0 +1,449 @@
+openapi: 3.0.1
+info:
+  title: Trip Management Service API
+  description: "API for managing trips, schedules, and trip-stations."
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/LAKSHANNIMANSU8/Railway_Infrastructure_Service/1.0.0
+  description: SwaggerHub API Auto Mocking
+- url: http://localhost:3000
+  description: Local server
+paths:
+  /trips:
+    get:
+      tags:
+      - Trips
+      summary: Get all trips
+      operationId: getAllTrips
+      responses:
+        "200":
+          description: A list of trips
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trip'
+    post:
+      tags:
+      - Trips
+      summary: Create a new trip
+      operationId: createTrip
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trip'
+        required: true
+      responses:
+        "201":
+          description: Trip created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trip'
+  /trips/{id}:
+    get:
+      tags:
+      - Trips
+      summary: Get trip by ID
+      operationId: getTripById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Trip details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trip'
+        "404":
+          description: Trip not found
+    put:
+      tags:
+      - Trips
+      summary: Update a trip
+      operationId: updateTrip
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trip'
+        required: true
+      responses:
+        "200":
+          description: Trip updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trip'
+    delete:
+      tags:
+      - Trips
+      summary: Delete a trip
+      operationId: deleteTrip
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "204":
+          description: Trip deleted
+        "404":
+          description: Trip not found
+  /trips/train/{train_id}:
+    get:
+      tags:
+      - Trips
+      summary: Get trip details by train ID
+      operationId: getTripDetailsByTrainId
+      parameters:
+      - name: train_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Trip details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trip'
+        "404":
+          description: Trips not found
+  /schedules:
+    get:
+      tags:
+      - Schedules
+      summary: Get all schedules
+      operationId: getAllSchedules
+      responses:
+        "200":
+          description: A list of schedules
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Schedule'
+    post:
+      tags:
+      - Schedules
+      summary: Create a new schedule
+      operationId: createSchedule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schedule'
+        required: true
+      responses:
+        "201":
+          description: Schedule created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+  /schedules/{id}:
+    get:
+      tags:
+      - Schedules
+      summary: Get schedule by ID
+      operationId: getScheduleById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Schedule details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+        "404":
+          description: Schedule not found
+    put:
+      tags:
+      - Schedules
+      summary: Update a schedule
+      operationId: updateSchedule
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schedule'
+        required: true
+      responses:
+        "200":
+          description: Schedule updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+    delete:
+      tags:
+      - Schedules
+      summary: Delete a schedule
+      operationId: deleteSchedule
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "204":
+          description: Schedule deleted
+        "404":
+          description: Schedule not found
+  /schedules/trip/{trip_id}:
+    get:
+      tags:
+      - Schedules
+      summary: Get schedule details by trip ID
+      operationId: getScheduleDetailsByTripId
+      parameters:
+      - name: trip_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Schedule details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Schedule'
+        "404":
+          description: Schedules not found
+  /trip-stations:
+    get:
+      tags:
+      - Trip Stations
+      summary: Get all trip stations
+      operationId: getAllTripStations
+      responses:
+        "200":
+          description: A list of trip stations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TripStation'
+    post:
+      tags:
+      - Trip Stations
+      summary: Create a new trip station
+      operationId: createTripStation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TripStation'
+        required: true
+      responses:
+        "201":
+          description: Trip station created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TripStation'
+  /trip-stations/{id}:
+    get:
+      tags:
+      - Trip Stations
+      summary: Get trip station by ID
+      operationId: getTripStationById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Trip station details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TripStation'
+        "404":
+          description: Trip station not found
+    put:
+      tags:
+      - Trip Stations
+      summary: Update a trip station
+      operationId: updateTripStation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TripStation'
+        required: true
+      responses:
+        "200":
+          description: Trip station updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TripStation'
+    delete:
+      tags:
+      - Trip Stations
+      summary: Delete a trip station
+      operationId: deleteTripStation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "204":
+          description: Trip station deleted
+        "404":
+          description: Trip station not found
+  /trip-stations/stations/{trip_id}:
+    get:
+      tags:
+      - Trip Stations
+      summary: Get stations by trip ID
+      operationId: getStationsByTripId
+      parameters:
+      - name: trip_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Trip stations details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TripStation'
+        "404":
+          description: Trip stations not found
+components:
+  schemas:
+    Trip:
+      type: object
+      properties:
+        trip_number:
+          type: integer
+          example: 1005
+        route_id:
+          type: string
+          example: R001
+        train_id:
+          type: integer
+          example: 1040
+        type:
+          type: string
+          example: Express
+    Schedule:
+      type: object
+      properties:
+        trip_id:
+          type: integer
+          example: 1005
+        start_time:
+          pattern: "^\\\\d{2}:\\\\d{2}:\\\\d{2}$"
+          type: string
+          example: 05:55:00
+        end_time:
+          pattern: "^\\\\d{2}:\\\\d{2}:\\\\d{2}$"
+          type: string
+          example: 15:42:00
+        frequency:
+          type: string
+          example: Daily
+        duration:
+          type: integer
+          example: 587
+    TripStation:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        trip_id:
+          type: integer
+          example: 6012
+        station_id:
+          type: string
+          example: ST0344
+        stop_sequence:
+          type: integer
+          example: 1
+        arrival_time:
+          pattern: "^\\\\d{2}:\\\\d{2}:\\\\d{2}$"
+          type: string
+          example: 07:40:00
+        departure_time:
+          pattern: "^\\\\d{2}:\\\\d{2}:\\\\d{2}$"
+          type: string
+          example: 07:50:00
+        stop_duration:
+          type: integer
+          example: 10

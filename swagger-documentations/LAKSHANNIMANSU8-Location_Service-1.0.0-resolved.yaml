@@ -1,0 +1,151 @@
+openapi: 3.0.1
+info:
+  title: Location Service API
+  description: API for managing location data related to trains.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Local server
+paths:
+  /data:
+    get:
+      tags:
+        - train-locations
+      summary: Get all location data
+      operationId: getAllLocations
+      responses:
+        "200":
+          description: A list of locations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Location"
+  /filter-trains:
+    get:
+      tags:
+        - train-locations
+      summary: Filter train data by stations
+      operationId: filterTrainDataByStations
+      parameters:
+        - name: startStation
+          in: query
+          description: The starting station to filter by
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: endStation
+          in: query
+          description: The ending station to filter by
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Filtered train data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Location"
+  /:
+    post:
+      tags:
+        - train-locations
+      summary: Create a new location entry
+      operationId: postLocationData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Location"
+        required: true
+      responses:
+        "201":
+          description: Location created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Location"
+components:
+  schemas:
+    Location:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 66ce22bcb20054878ea107d1
+        deviceID:
+          type: string
+          example: "10080"
+        latitude:
+          type: number
+          example: 8.58443346
+        longitude:
+          type: number
+          example: 81.225952972
+        speed:
+          type: number
+          example: 92.0689084991655
+        timestamp:
+          type: string
+          format: date-time
+          example: 2024-08-27T21:24:50.123Z
+        geoLocation:
+          type: string
+          example: Heading to next station
+        route_name:
+          type: string
+          example: Trincomalee - Colombo Fort
+        trip_number:
+          type: string
+          example: "7084"
+        train_name:
+          type: string
+          example: ""
+        type:
+          type: string
+          example: Express
+        frequency:
+          type: string
+          example: Daily
+        start_time:
+          type: string
+          example: 19:00:00
+        end_time:
+          type: string
+          example: 08:03:00
+        start_station:
+          type: string
+          example: Trincomalee
+        end_station:
+          type: string
+          example: Colombo Fort
+        duration:
+          type: string
+          example: "483"
+        stopping_stations:
+          type: array
+          items:
+            $ref: "#/components/schemas/Location_stopping_stations"
+    Location_stopping_stations:
+      type: object
+      properties:
+        station_id:
+          type: string
+          example: ST0352
+        station_name:
+          type: string
+          example: Trincomalee
+        arrival_time:
+          type: string
+          example: 18:25:00
+        departure_time:
+          type: string
+          example: 19:00:00

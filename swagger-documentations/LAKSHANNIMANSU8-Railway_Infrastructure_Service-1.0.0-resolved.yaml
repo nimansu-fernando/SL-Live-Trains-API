@@ -1,0 +1,377 @@
+openapi: 3.0.0
+info:
+  title: Railway Infrastructure Service API
+  description: "API for managing lines, routes, stations, and line routes."
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/LAKSHANNIMANSU8/Railway_Infrastructure_Service/1.0.0
+  description: SwaggerHub API Auto Mocking
+- url: http://localhost:3000
+paths:
+  /lines:
+    get:
+      tags:
+      - Lines
+      summary: Get all lines
+      operationId: getAllLines
+      responses:
+        "200":
+          description: A list of lines
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Line'
+    post:
+      tags:
+      - Lines
+      summary: Create a new line
+      operationId: createLine
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Line'
+      responses:
+        "201":
+          description: Line created successfully
+  /lines/{id}:
+    get:
+      tags:
+      - Lines
+      summary: Get line by ID
+      operationId: getLineById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Line details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Line'
+    put:
+      tags:
+      - Lines
+      summary: Update a line
+      operationId: updateLine
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Line'
+      responses:
+        "200":
+          description: Line updated successfully
+    delete:
+      tags:
+      - Lines
+      summary: Delete a line
+      operationId: deleteLine
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "204":
+          description: Line deleted successfully
+  /routes:
+    get:
+      tags:
+      - Routes
+      summary: Get all routes
+      operationId: getAllRoutes
+      responses:
+        "200":
+          description: A list of routes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Route'
+    post:
+      tags:
+      - Routes
+      summary: Create a new route
+      operationId: createRoute
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Route'
+      responses:
+        "201":
+          description: Route created successfully
+  /routes/{id}:
+    get:
+      tags:
+      - Routes
+      summary: Get route by ID
+      operationId: getRouteById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Route details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+    put:
+      tags:
+      - Routes
+      summary: Update a route
+      operationId: updateRoute
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Route'
+      responses:
+        "200":
+          description: Route updated successfully
+    delete:
+      tags:
+      - Routes
+      summary: Delete a route
+      operationId: deleteRoute
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "204":
+          description: Route deleted successfully
+  /stations:
+    get:
+      tags:
+      - Stations
+      summary: Get all stations
+      operationId: getAllStations
+      responses:
+        "200":
+          description: A list of stations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Station'
+    post:
+      tags:
+      - Stations
+      summary: Create a new station
+      operationId: createStation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Station'
+      responses:
+        "201":
+          description: Station created successfully
+  /stations/{id}:
+    get:
+      tags:
+      - Stations
+      summary: Get station by ID
+      operationId: getStationById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Station details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Station'
+    put:
+      tags:
+      - Stations
+      summary: Update a station
+      operationId: updateStation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Station'
+      responses:
+        "200":
+          description: Station updated successfully
+    delete:
+      tags:
+      - Stations
+      summary: Delete a station
+      operationId: deleteStation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "204":
+          description: Station deleted successfully
+  /line-routes:
+    get:
+      tags:
+      - Line Routes
+      summary: Get all line routes
+      operationId: getAllLineRoutes
+      responses:
+        "200":
+          description: A list of line routes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LineRoute'
+    post:
+      tags:
+      - Line Routes
+      summary: Create a new line route
+      operationId: createLineRoute
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LineRoute'
+      responses:
+        "201":
+          description: Line route created successfully
+components:
+  schemas:
+    Line:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        line_code:
+          type: string
+          example: MAL
+        name:
+          type: string
+          example: Main Line
+        description:
+          type: string
+          example: Colombo Fort to Badulla
+        length_km:
+          type: number
+          format: float
+          example: 292
+        stations:
+          type: integer
+          example: 105
+    Route:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        short_code:
+          type: string
+          example: FOT-BAD
+        route_key:
+          type: string
+          example: R001
+        name:
+          type: string
+          example: Colombo Fort - Badulla
+        distance_km:
+          type: number
+          format: float
+          example: 292
+    Station:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        station_code:
+          type: string
+          example: ST001
+        name:
+          type: string
+          example: Colombo Fort
+        short_code:
+          type: string
+          example: CMB
+        city:
+          type: string
+          example: Colombo
+        latitude:
+          type: number
+          format: float
+          example: 6.927079
+        longitude:
+          type: number
+          format: float
+          example: 79.861244
+        line_id:
+          type: string
+          example: MAL
+    LineRoute:
+      type: object
+      properties:
+        line_code:
+          type: string
+          example: MAL
+        route_key:
+          type: string
+          example: R001
