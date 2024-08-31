@@ -1,0 +1,328 @@
+openapi: 3.0.0
+info:
+  title: Locomotive Management Service API
+  description: API for managing engines and trains (coaches)
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/LAKSHANNIMANSU8/Railway_Infrastructure_Service/1.0.0
+  description: SwaggerHub API Auto Mocking
+- url: http://localhost:3000
+paths:
+  /engines:
+    get:
+      tags:
+      - Engines
+      summary: Get all engines
+      responses:
+        "200":
+          description: A list of all engines
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Engine'
+        "500":
+          description: Internal server error
+    post:
+      tags:
+      - Engines
+      summary: Create a new engine
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Engine'
+        required: true
+      responses:
+        "201":
+          description: Engine created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Engine'
+        "400":
+          description: "Bad request, invalid input"
+        "500":
+          description: Internal server error
+  /engines/{id}:
+    get:
+      tags:
+      - Engines
+      summary: Get engine by ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Engine details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Engine'
+        "404":
+          description: Engine not found
+        "500":
+          description: Internal server error
+    put:
+      tags:
+      - Engines
+      summary: Update engine by ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Engine'
+        required: true
+      responses:
+        "200":
+          description: Engine updated successfully
+        "400":
+          description: "Bad request, invalid input"
+        "404":
+          description: Engine not found
+        "500":
+          description: Internal server error
+    delete:
+      tags:
+      - Engines
+      summary: Delete engine by ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "204":
+          description: Engine deleted successfully
+        "404":
+          description: Engine not found
+        "500":
+          description: Internal server error
+  /engines/by-device/{device_id}:
+    get:
+      tags:
+      - Engines
+      summary: Get engine number by device ID
+      parameters:
+      - name: device_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Engine number associated with the device ID
+          content:
+            application/json:
+              schema:
+                type: string
+        "404":
+          description: Device ID not found
+        "500":
+          description: Internal server error
+  /trains:
+    get:
+      tags:
+      - Trains
+      summary: Get all trains
+      responses:
+        "200":
+          description: A list of all trains
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Train'
+        "500":
+          description: Internal server error
+    post:
+      tags:
+      - Trains
+      summary: Create a new train
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Train'
+        required: true
+      responses:
+        "201":
+          description: Train created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Train'
+        "400":
+          description: "Bad request, invalid input"
+        "500":
+          description: Internal server error
+  /trains/{id}:
+    get:
+      tags:
+      - Trains
+      summary: Get train by ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Train details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Train'
+        "404":
+          description: Train not found
+        "500":
+          description: Internal server error
+    put:
+      tags:
+      - Trains
+      summary: Update train by ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Train'
+        required: true
+      responses:
+        "200":
+          description: Train updated successfully
+        "400":
+          description: "Bad request, invalid input"
+        "404":
+          description: Train not found
+        "500":
+          description: Internal server error
+    delete:
+      tags:
+      - Trains
+      summary: Delete train by ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "204":
+          description: Train deleted successfully
+        "404":
+          description: Train not found
+        "500":
+          description: Internal server error
+  /trains/by-engine/{engine_number}:
+    get:
+      tags:
+      - Trains
+      summary: Get train number by engine number
+      parameters:
+      - name: engine_number
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Train number associated with the engine number
+          content:
+            application/json:
+              schema:
+                type: string
+        "404":
+          description: Engine number not found
+        "500":
+          description: Internal server error
+components:
+  schemas:
+    Engine:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        engine_number:
+          type: string
+          example: E001
+        type:
+          type: string
+          example: Diesel
+        class:
+          type: string
+          example: W3
+        capacity:
+          type: integer
+          example: 1500
+        power:
+          type: integer
+          example: 3200
+        status:
+          type: string
+          example: Operational
+        iot_device_id:
+          type: string
+          example: "10010"
+    Train:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        train_number:
+          type: string
+          example: "1040"
+        name:
+          type: string
+          example: Podi Menike
+        number_of_coaches:
+          type: integer
+          example: 12
+        seating_capacity:
+          type: integer
+          example: 900
+        class_configuration:
+          type: string
+          example: "First, Second, Third"
+        status:
+          type: string
+          example: Operational
+        engine_number:
+          type: string
+          example: E001

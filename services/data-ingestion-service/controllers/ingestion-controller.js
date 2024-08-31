@@ -33,6 +33,18 @@ async function postIngestedData(req, res, next) {
     }
 }
 
+async function getIngestedData(req, res, next) {
+  try {
+    const data = await ingestionService.getAllData(); 
+
+    res.status(200).json(data);
+  } catch (error) {
+    console.error('Error retrieving data:', error.message);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+}
+
 module.exports = {
   postIngestedData,
+  getIngestedData
 };

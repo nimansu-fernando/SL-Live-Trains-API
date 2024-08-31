@@ -51,6 +51,11 @@ async function ingestData(data) {
     }
 }
 
+async function getAllData() {
+    return await IngestionModel.find(); 
+  }
+
 module.exports = {
     ingestData,
+    getAllData
 };

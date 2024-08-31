@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #06183d;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #ffffff;
+        }
+
+        .highlight {
+            background-color: #ffdd57; /* Highlight color */
+            color: #000; /* Text color for contrast */
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        main {
+            display: flex;
+            height: calc(100vh - 60px); 
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px; 
+            width: 40%;
+            padding: 5px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .service {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Full width of the left-section */
+            box-sizing: border-box;
+        }
+
+        .service-info {
+            margin-right: 20px;
+            flex: 1; 
+        }
+
+        h2 {
+            font-size: 18px;
+            margin: 0;
+            color: #333;
+        }
+
+        p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #06183d;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+
+        .right-section {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+
+        #swagger-ui {
+            height: 100%;
+        }
+    </style>
+    <!-- Swagger UI CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist/swagger-ui.css" />
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Sri Lanka Live Trains - API Documentation</h1>
+        </div>
+        <div class="highlight">6 API Documents Available</div>
+    </header>
+
+    <main>
+        <div class="left-section">
+            <!-- Repeat this section for each service -->
+            <section class="service">
+                <div class="service-info">
+                    <h2>Railway Infrastructure API</h2>
+                    <p>Manages railway infrastructure data including lines, routes, and stations</p>
+                </div>
+                <div class="service-action">
+                    <a href="#" class="btn" onclick="loadSwaggerUI('./LAKSHANNIMANSU8-Railway_Infrastructure_Service-1.0.0-resolved.yaml')">API DOCUMENTATION</a>
+                </div>
+            </section>
+
+            <section class="service">
+                <div class="service-info">
+                    <h2>Locomotive Management API</h2>
+                    <p>Handles locomotive and train data, including details about engines, trains (coaches)</p>
+                </div>
+                <div class="service-action">
+                    <a href="#" class="btn" onclick="loadSwaggerUI('./LAKSHANNIMANSU8-Locomotive_Management_Service-1.0.0-resolved.yaml')">API DOCUMENTATION</a>
+                </div>
+            </section>
+
+            <section class="service">
+                <div class="service-info">
+                    <h2>Trip Management API</h2>
+                    <p>Manages trip information, including schedules and stops</p>
+                </div>
+                <div class="service-action">
+                    <a href="#" class="btn" onclick="loadSwaggerUI('./LAKSHANNIMANSU8-Trip_Management_Service-1.0.0-resolved.yaml')">API DOCUMENTATION</a>
+                </div>
+            </section>
+
+            <section class="service">
+                <div class="service-info">
+                    <h2>Location API</h2>
+                    <p>Stores and retrieves real-time train location data and utilizes reverse geocoding</p>
+                </div>
+                <div class="service-action">
+                    <a href="#" class="btn" onclick="loadSwaggerUI('./LAKSHANNIMANSU8-Location_Service-1.0.0-resolved.yaml')">API DOCUMENTATION</a>
+                </div>
+            </section>
+
+            <section class="service">
+                <div class="service-info">
+                    <h2>Data Ingestion API</h2>
+                    <p>Receives and processes data from train location generators</p>
+                </div>
+                <div class="service-action">
+                    <a href="#" class="btn" onclick="loadSwaggerUI('./LAKSHANNIMANSU8-Data_Ingestion_Service-1.0.0-resolved.yaml')">API DOCUMENTATION</a>
+                </div>
+            </section>
+
+            <section class="service">
+                <div class="service-info">
+                    <h2>User API</h2>
+                    <p>Provides API security and authentication for accessing other services</p>
+                </div>
+                <div class="service-action">
+                    <a href="#" class="btn" onclick="loadSwaggerUI('./LAKSHANNIMANSU8-User_Service-1.0.0-resolved.yaml')">API DOCUMENTATION</a>
+                </div>
+            </section>
+        </div>
+
+        <div class="right-section">
+            <!-- Swagger UI Container -->
+            <div id="swagger-ui"></div>
+        </div>
+    </main>
+
+    <!-- Swagger UI JS -->
+    <script src="https://unpkg.com/swagger-ui-dist/swagger-ui-bundle.js"></script>
+    <script src="https://unpkg.com/swagger-ui-dist/swagger-ui-standalone-preset.js"></script>
+    <script>
+        function loadSwaggerUI(url) {
+            SwaggerUIBundle({
+                url: url,
+                dom_id: '#swagger-ui',
+                presets: [
+                    SwaggerUIBundle.presets.apis,
+                    SwaggerUIStandalonePreset
+                ],
+                layout: "StandaloneLayout"
+            });
+        }
+    </script>
+</body>
+</html>

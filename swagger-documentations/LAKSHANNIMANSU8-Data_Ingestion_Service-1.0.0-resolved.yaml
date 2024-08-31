@@ -1,0 +1,67 @@
+openapi: 3.0.1
+info:
+  title: Data Ingestion Service API
+  description: API for ingesting and retrieving data.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Local server
+paths:
+  /ingest:
+    post:
+      tags:
+        - Ingestions
+      summary: Ingest new data
+      operationId: postIngestedData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ingestion"
+        required: true
+      responses:
+        "201":
+          description: Data successfully ingested
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ingestion"
+  /data:
+    get:
+      tags:
+        - Ingestions
+      summary: Retrieve all ingested data
+      operationId: getIngestedData
+      responses:
+        "200":
+          description: A list of ingested data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Ingestion"
+components:
+  schemas:
+    Ingestion:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 66ce22bcb20054878ea107d1
+        deviceID:
+          type: string
+          example: "10080"
+        latitude:
+          type: number
+          example: 8.58443346
+        longitude:
+          type: number
+          example: 81.225952972
+        speed:
+          type: number
+          example: 92.0689084991655
+        timestamp:
+          type: string
+          format: date-time
+          example: 2024-08-27T21:24:50.123Z
